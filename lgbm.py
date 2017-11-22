@@ -241,7 +241,7 @@ params = {
     }
 
 model_f1 = lgb.train(params, train_set=d_train_final,  valid_sets=watchlist_final, verbose_eval=5)
-gbm.save_model('model_f1.txt')
+model_f1.save_model('model_f1.txt')
 
 params = {
         'objective': 'binary',
@@ -262,7 +262,7 @@ params = {
     }
 
 model_f2 = lgb.train(params, train_set=d_train_final,  valid_sets=watchlist_final, verbose_eval=5)
-gbm.save_model('model_f2.txt')
+model_f2.save_model('model_f2.txt')
 
 print('Making predictions')
 p_test_1 = model_f1.predict(X_test)
