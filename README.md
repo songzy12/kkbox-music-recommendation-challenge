@@ -1,6 +1,38 @@
 ## Solution
 
-Rank 1: https://www.kaggle.com/c/kkbox-music-recommendation-challenge/discussion/45942
+Rank 1: 
+
+​    https://www.kaggle.com/c/kkbox-music-recommendation-challenge/discussion/45942
+
+0.6 * LightGBMs and 0.4 * NNs
+
+bagging ensembles of several predictions with a slightly different subset of features
+
+* Single LightGBMs: 0.74440, bagging ensemble: 0.74460
+* 30-ensemble on same feature set: 0.74215, bagging ensemble: 0.74333
+* ensemble of single LightGBM and NN: 0.7485+
+* ensemble of ensembles: 0.749+
+
+NN:
+
+* field aware: user field, song field, context field
+* trainable embedding with L2 regularization for categorical features
+* offset for users between final representation and predicted results from metadata
+* optimizer: RMSProp 
+* dot layers for user-song pairs
+* ensemble
+
+LightGBM: 400 features
+
+FE:
+
+* conditional probability features: 
+  * P(source_type|msno), P(source_screen_name|msno), P(source_system_tab|msno), 
+  * P(source_type|song_id), P(source_screen_name|song_id), P(source_system_tab|song_id), 
+  * P(artist_name|msno), P(language|msno), P(first_genre_id|msno)
+* Timestamp
+* SVD features with user-song matrix and user-artist matrix
+* count features, last song features, next song features
 
 ## MISC
 
